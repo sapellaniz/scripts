@@ -15,3 +15,13 @@ Para compilarlo simplemente:
 ```
 gcc -o floyd floyd.c
 ```
+
+Se puede usar en modo interactivo(pasar los datos al programa en tiempo de ejecución):
+```
+./floyd
+```
+
+O también se pueden pasar los datos al llamar al programa:
+```
+./floyd (vertices) (11 12 13 1n 21 22 23 2n n1 n2 n3 nn)
+```
