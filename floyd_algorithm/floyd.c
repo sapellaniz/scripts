@@ -6,7 +6,7 @@
 	number of vertices of your graph. In linux it can be
 	done easily with the next command:
 
-	"sed -i 's/\[9\]\[9\]/[n][n]/g floyd.c"
+	"sed -i 's/\[9\]\[9\]/[n][n]/g' floyd.c"
 
 	For non-adjacent vertices enter negative distance i.e:
 		dist(1,2) = -1	
