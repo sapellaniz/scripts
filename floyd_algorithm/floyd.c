@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 void printMatrix(int matrix[9][9], int n)
 {
@@ -24,34 +25,52 @@ void printMatrix(int matrix[9][9], int n)
   {
     for(j = 0 ; j < n ; j++)
     {
-      printf("  %d", matrix[i][j]);
+      printf("\t%d", matrix[i][j]);
     }
     printf("\n\n");
   }
 }
 
-void main()
+void main(int argc, char *argv[])
 {
   int n, i, j, k;
-
-  printf("Floyd's algorithm calculator\n\n");
-  printf("Number of vertices: ");
-  scanf("%d", &n);
-  printf("\n");
-
   int matrix[9][9] = {0};
 
   // Init matrix
-  for(i = 0 ; i < n ; i++)
+  if(argc == 1)
   {
-    for(j = 0 ; j< n ; j++)
+    printf("Floyd's algorithm calculator\n\n");
+    printf("Number of vertices: ");
+    scanf("%d", &n);
+    printf("\n");
+
+    for(i = 0 ; i < n ; i++)
     {
-      if(j == i)
-        matrix[i][j] = 0;
-      else
+      for(j = 0 ; j< n ; j++)
       {
-        printf("dist(%d,%d) = ", i+1, j+1);
-        scanf("%d", &matrix[i][j]);
+        if(j == i)
+          matrix[i][j] = 0;
+        else
+        {
+          printf("dist(%d,%d) = ", i+1, j+1);
+          scanf("%d", &matrix[i][j]);
+        }
+      }
+    }
+  }
+  else
+  {
+    n = atoi(argv[1]);
+    if(n*n != argc - 2)
+    {
+      printf("error: Invalid number of values\n");
+      exit(1);
+    }
+    for(i = 0 ; i < n ; i++)
+    {
+      for(j = 0 ; j < n ; j++)
+      {
+        matrix[i][j] = atoi(argv[i*n+j+2]);
       }
     }
   }
@@ -70,11 +89,11 @@ void main()
 	if(k != i && k != j && i != j)
 	  if((matrix[i][k] + matrix[k][j]) < matrix[i][j] || matrix[i][j] < 0)
 	    if(matrix[i][k] > 0 && matrix[k][j] > 0)
-	      matrix[i][j] = matrix[k][i] + matrix[k][j];
+	      matrix[i][j] = matrix[i][k] + matrix[k][j];
       }
     }
 
-    printf("d%d =\n\n", k);
+    printf("d%d =\n\n", k+1);
     printMatrix(matrix, n);
   }
 
